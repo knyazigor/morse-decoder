@@ -38,7 +38,16 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let arr = Array.from(expr.match(/(\d{10}|\*{10})/gm))
+    return arr.map((elem) => {        
+        let result = ''
+        for (let i = 0; i < elem.length; i += 2) {
+            //console.log(elem.slice(i, i+2))
+            if (elem.slice(i, i+2) == '10') result += '.'
+            if (elem.slice(i, i+2) == '11') result += '-'
+        }
+        return result
+    }).map((elem) => MORSE_TABLE[elem] || ' ').join('')
 }
 
 module.exports = {
